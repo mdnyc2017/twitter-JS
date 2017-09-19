@@ -3,7 +3,11 @@ const _ = require('lodash');
 var data = [];
 
 function add (name, content) {
-    data.push({ name: name, content: content });
+    
+    data.push({ name: name, content: content, uniqueID: data.length });
+    
+
+
 }
 
 function list () {
@@ -12,6 +16,8 @@ function list () {
 
 function find (properties) {
     return _.cloneDeep(_.filter(data, properties));
+
+
 }
 
 module.exports = { add: add, list: list, find: find };
