@@ -4,6 +4,7 @@ const app = express(); // creates an instance of an express application
 const nunjucks = require('nunjucks')
 const routes = require('./routes');
 const people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
+var tweet = require('./tweetBank')
 
 app.use(express.static('public'))
 nunjucks.configure('views', {noCache: true});
@@ -19,10 +20,12 @@ app.use(function (req, res, next) {
     console.log(req.path)
     next();
 })
-// app.use('/', routes);
+  //app.use('/', routes);
 app.get('/',function (req, res, next) {
-    res.render( 'index', {title: 'Hall of Fame', people: people} );    
+      console.log(tweet.list());
+    res.render( 'index', {title: 'Hall of Fame', tweets: tweet.list()} );
 })
+
 app.listen(3000, function () {
     console.log('server listening')
   })
